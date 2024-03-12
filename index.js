@@ -1,6 +1,7 @@
 let numberOfDrumButtons = document.querySelectorAll(".drum").length;
 
 for (let i = 0; i < numberOfDrumButtons; i++){
+    // button detection
     document.querySelectorAll(".drum")[i].addEventListener("click", function(){
         // identity of the button that currently is clicked
         // this.style.color = "white"
@@ -8,16 +9,18 @@ for (let i = 0; i < numberOfDrumButtons; i++){
         var buttonInnerHTML = this.innerHTML;
         makeSound(buttonInnerHTML)
         
+        buttonAnimation(buttonInnerHTML);
     });
 }
 
+// keyboard detection
 document.addEventListener("keydown", function(e){
     // e -> event
     // console.log(e)
     // alert("key was pressed")
     var key = e.key;
     makeSound(key);
-
+    buttonAnimation(key);
 })
 
 function makeSound(key){
@@ -53,4 +56,14 @@ function makeSound(key){
         default:
             console.log(key);
     }
+}
+
+function buttonAnimation(currentKey){
+    
+    var activeButton = document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function(){
+        activeButton.classList.remove("pressed")
+    }, 100)
+
 }
